@@ -2,14 +2,27 @@
 
 public class QuitManager : MonoBehaviour
 {
-    // ボタンが押されたときに呼ばれるメソッド
+    // InspectorからダイアログのUIパネルを割り当てる
+    [SerializeField] private GameObject confirmDialogPanel;
+
+    // 最初の「終了」ボタンを押した時に呼ばれる
+    public void ShowConfirmDialog()
+    {
+        confirmDialogPanel.SetActive(true);
+    }
+
+    // ダイアログの「いいえ」を押した時に呼ばれる
+    public void HideConfirmDialog()
+    {
+        confirmDialogPanel.SetActive(false);
+    }
+
+    // ダイアログの「はい」を押した時に呼ばれる（実際の終了処理）
     public void QuitApp()
     {
 #if UNITY_EDITOR
-        // Unityエディタのプレイモードを終了する
         UnityEditor.EditorApplication.isPlaying = false;
 #else
-        // ビルドされたアプリケーションを終了する
         Application.Quit();
 #endif
     }
